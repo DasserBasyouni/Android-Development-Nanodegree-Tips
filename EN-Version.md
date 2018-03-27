@@ -12,7 +12,7 @@ Related: [Why java.util.Objects private constructor throws assertionError
 ](https://stackoverflow.com/questions/25658330/why-java-util-objects-private-constructor-throws-assertionerror)
 
 3. Organize your code by using descriptive packages.  
-For example, you can store your "Adapter" classes in a package named "adapter"
+For example, you can store your "Adapter" classes in a package named "adapter"  
 Related: [Package - JavaPoints.com
 ](https://www.javatpoint.com/package)
 
