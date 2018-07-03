@@ -31,3 +31,24 @@ This works by caching Views; so findViewById() only has to be called once per vi
 <\<CONSTRUCTORS>\>  
 <\<METHODS>\>  
 This makes the class structure predictable. [See this guide for more common standards](https://google.github.io/styleguide/javaguide.html) 
+
+-----------
+**Questions asked to mentors**
+
+// Baking App
+1. I allowing allowMainThreadQueries() to do those widget queries, is there is a better way?  (In Baking App widget)
+Yes. You should refrain from doing anykind of long running operation on the UI thread, since it can block it. You would want to move it off of the main thread. Previously you would use something like a Loader, but they have recently been deprecated so the recommended approach is to use a combination of [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) and [ViewModel.]( 
+https://developer.android.com/topic/libraries/architecture/viewmodel)
+
+2. according to [Recommended way for releasing and recreating the player?](https://github.com/brianwernick/ExoMedia/issues/425)
+is this the appropriate way ?
+The proper way is to release the assets manually. The referenced link is actually a library that wraps the ExoPlayer. The setup you are using won't actually release the assets automatically. ExoMedia and ExoPlayer are two different things. ExoMedia is actually a library that wraps ExoPlayer. If it can't use ExoPlayer then it uses VideoView. SimpleExoPlayer in this case has to be released manually.
+
+3. LIKE in Room is returning null, code:  
+ `@Query("SELECT ingredients FROM recipe_db WHERE id LIKE :id LIMIT 1")
+ String getRecipeIngredients(int id);`  
+ This is happening because the SQL is setup incorrectly. You want to set it up so it matches the passed in ID. The LIKE clause works differently and uses pattern matching symbols.  
+Related: [My Stack-overflow Question](https://stackoverflow.com/questions/50918340/room-persistence-library-query-not-working/51164049#51164049)
+
+4. when the phone rotates the progress-bar visibility goes to Visible again, how to disable that?  
+On rotation, a Loader honors the lifecycle. The default state of the progressBar is visible. You can use something like onSaveInstanceState() and onRestoreInstanceState() to manage it based on the data provided by the Loader
