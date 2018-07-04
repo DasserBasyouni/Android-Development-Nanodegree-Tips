@@ -47,7 +47,7 @@ The proper way is to release the assets manually. The referenced link is actuall
 3. LIKE in Room is returning null, code:  
  `@Query("SELECT ingredients FROM recipe_db WHERE id LIKE :id LIMIT 1")
  String getRecipeIngredients(int id);`  
- This is happening because the SQL is setup incorrectly. You want to set it up so it matches the passed in ID. The LIKE clause works differently and uses [pattern matching symbols.](http://www.sqlitetutorial.net/sqlite-like/)
+ This is happening because the SQL is setup incorrectly. You want to set it up so it matches the passed in ID. The LIKE clause works differently and uses [pattern matching symbols.](http://www.sqlitetutorial.net/sqlite-like/)  
 Related: [My Stack-overflow Question](https://stackoverflow.com/questions/50918340/room-persistence-library-query-not-working/51164049#51164049)
 
 4. when the phone rotates the progress-bar visibility goes to Visible again, how to disable that?  
